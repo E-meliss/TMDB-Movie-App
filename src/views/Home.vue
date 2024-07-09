@@ -23,7 +23,7 @@ export default {
     },
     mounted() {
         fetch(
-                'https://api.themoviedb.org/3/movie/top_rated?api_key=348088421ad3fb3a9d6e56bb6a9a8f80&language=en-US&page=1'
+                'https://api.themoviedb.org/3/movie/popular?api_key=348088421ad3fb3a9d6e56bb6a9a8f80&language=en-US&page=1'
             )
             .then((response) => response.json())
             .then((data) => (this.movies = data.results))
