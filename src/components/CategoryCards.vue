@@ -1,12 +1,12 @@
 <template>
-  <div class="category-card">
-    <img :src="getImageUrl(item)" :alt="item.title" class="w-full rounded-lg shadow-md">
+  <div class="category-card" @click="navigateToDetail">
+    <img :src="getImageUrl(item)" :alt="item.title || item.original_name" class="w-full rounded-lg shadow-md">
     <div class="p-4">
-        <h2 v-if="item.title" class="font-bold text-xl mb-2 text-black">{{ item.title }}</h2>
-        <h2 v-if="item.original_name" class="font-bold text-xl mb-2 text-black">{{ item.original_name }}</h2>
-        <p v-if="item.release_date" class="text-gray-900">{{ formatDate(item.release_date) }}</p>
-        <p v-if="item.first_air_date" class="text-gray-900">{{ formatDate(item.first_air_date) }}</p>
-        <p class="text-gray-900">Rating: {{ item.vote_average }}</p>
+      <h2 v-if="item.title" class="font-bold text-xl mb-2 text-black">{{ item.title }}</h2>
+      <h2 v-if="item.original_name" class="font-bold text-xl mb-2 text-black">{{ item.original_name }}</h2>
+      <p v-if="item.release_date" class="text-gray-900">{{ formatDate(item.release_date) }}</p>
+      <p v-if="item.first_air_date" class="text-gray-900">{{ formatDate(item.first_air_date) }}</p>
+      <p class="text-gray-900">Rating: {{ item.vote_average }}</p>
     </div>
   </div>
 </template>
@@ -27,10 +27,19 @@ export default {
     },
     getImageUrl(item) {
       return 'https://image.tmdb.org/t/p/w500' + item.poster_path;
+    },
+    navigateToDetail() {
+      const name = this.item.title || this.item.original_name;
+      const formattedName = name.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+      const path = this.item.title ? 
+        `/movie/${this.item.id}-${formattedName}` :
+        `/tv/${this.item.id}-${formattedName}`;
+      this.$router.push(path);
     }
   }
 };
 </script>
+
 
 <style scoped>
 .category-card {

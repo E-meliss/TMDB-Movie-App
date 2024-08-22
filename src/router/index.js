@@ -10,6 +10,8 @@ import AirShows from '../views/AirShows.vue';
 import OnTVShows from '../views/OnAirShows.vue';
 import TopShows from '../views/TopShows.vue';
 import Home from '../views/Home.vue';
+import MovieDetail from '../views/MovieDetail.vue';
+import TvShowDetail from '../views/TvShowDetail.vue';
 
 const routes = [
   {
@@ -66,6 +68,18 @@ const routes = [
     path: '/tv-shows/top-rated',
     name: 'TopShows',
     component: TopShows
+  },
+  {
+    path: '/movie/:id-:name',
+    name: 'MovieDetail',
+    component: MovieDetail,
+    props: true
+  },
+  {
+    path: '/tv/:id-:name',
+    name: 'TvShowDetail',
+    component: TvShowDetail,
+    props: true
   },
 ];
 
